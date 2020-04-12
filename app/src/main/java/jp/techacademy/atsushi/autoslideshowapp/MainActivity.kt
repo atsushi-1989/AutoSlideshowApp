@@ -146,14 +146,6 @@ class MainActivity : AppCompatActivity(){
 
         var resolver = contentResolver
 
-        if(resolver != null){
-            nextButton.isEnabled = false
-            backButton.isEnabled = false
-            playButton.isEnabled = false
-
-        }
-
-
         cursor = resolver.query(
              MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
              null,
@@ -164,6 +156,10 @@ class MainActivity : AppCompatActivity(){
 
         if (cursor.moveToFirst()) {
             showUri(cursor)
+        }else{
+            nextButton.isEnabled = false
+            backButton.isEnabled = false
+            playButton.isEnabled = false
         }
 
 
