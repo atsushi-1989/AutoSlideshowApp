@@ -39,10 +39,8 @@ class MainActivity : AppCompatActivity(){
 
             } else {
                 //許可されていないので許可ダイアログを表示する
-                requestPermissions(
-                    arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
-                    PERMISSIONS_REQUEST_CODE
-                )
+                requestPermissions(arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),PERMISSIONS_REQUEST_CODE)
+
             }
             // Android 5系以下の場合
         } else {
@@ -98,7 +96,7 @@ class MainActivity : AppCompatActivity(){
                         }
                     }
 
-                },500,500)
+                },2000,2000)
                 playButton.text = "停止"
             }else{
                 if (mTimer != null){
@@ -114,8 +112,8 @@ class MainActivity : AppCompatActivity(){
 
     }
 
-    override fun onPause() {
-        super.onPause()
+    override fun onStop() {
+        super.onStop()
         cursor.close()
     }
 
@@ -129,12 +127,13 @@ class MainActivity : AppCompatActivity(){
         permissions: Array<out String>,
         grantResults: IntArray
     ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         when (requestCode) {
             PERMISSIONS_REQUEST_CODE ->
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     getContentsInfo()
                 }
+
+
         }
     }
 
