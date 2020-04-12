@@ -131,7 +131,11 @@ class MainActivity : AppCompatActivity(){
             PERMISSIONS_REQUEST_CODE ->
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     getContentsInfo()
-                }
+                }else{
+                nextButton.isEnabled = false
+                backButton.isEnabled = false
+                playButton.isEnabled = false
+            }
 
 
         }
@@ -140,19 +144,28 @@ class MainActivity : AppCompatActivity(){
     private fun getContentsInfo() {
         // 画像の情報を取得する
 
-
         var resolver = contentResolver
-         cursor = resolver.query(
-            MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-            null,
-            null,
-            null,
-            null
-        )!!
+
+        if(resolver != null){
+            nextButton.isEnabled = false
+            backButton.isEnabled = false
+            playButton.isEnabled = false
+
+        }
+
+
+        cursor = resolver.query(
+             MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+             null,
+             null,
+             null,
+             null
+         )!!
 
         if (cursor.moveToFirst()) {
             showUri(cursor)
         }
+
 
     }
 
